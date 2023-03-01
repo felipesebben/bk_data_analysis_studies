@@ -1,0 +1,6 @@
+hotel_id,accommodation_type,country,city,city_actual,center1label,distance,stars,rating,price
+21894,Apartment,Austria,Vienna,Vienna,City centre,2.7,4.0,4.4,81
+21897,Hotel,Austria,Vienna,Vienna,City centre,1.7,4.0,3.9,81
+21901,Hotel,Austria,Vienna,Vienna,City centre,1.4,4.0,3.7,85
+21902,Hotel,Austria,Vienna,Vienna,City centre,1.7,3.0,4.0,83
+21903,Hotel,Austria,Vienna,Vienna,City centre,1.2,4.0,3.9,82
