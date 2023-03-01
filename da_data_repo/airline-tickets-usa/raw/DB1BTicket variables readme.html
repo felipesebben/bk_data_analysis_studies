@@ -1,0 +1,41 @@
+<HTML>
+<HEAD>
+	<TITLE> readme.html </TITLE>
+</HEAD>
+<BODY>
+	<TABLE><TR><TD COLSPAN=2><H4>BACKGROUND</H4></TD></TR>
+	<TR><TD COLSPAN=2>The data contained in the compressed file has been extracted from the 
+	DB1BTicket data table of the "Origin and Destination Survey" database from the TranStats data library. 
+	The time period is indicated in the name of the compressed file; 
+	for example, XXX_XXXXX_2001_1 contains data of the first quarter of the year 2001. </TD></TR>
+	<TR><TD COLSPAN=2>&nbsp;</TD></TR>
+	<TR><TD COLSPAN=2><H4>RECORD LAYOUT</H4></TD></TR>
+	<TR><TD COLSPAN=2>Below are fields in the order that they appear on the records:</TD></TR>
+	<TR><TD>ItinID</TD><TD>Itinerary ID</TD></TR>
+	<TR><TD>Coupons</TD><TD>Number of Coupons in the Itinerary</TD></TR>
+	<TR><TD>Year</TD><TD>Year</TD></TR>
+	<TR><TD>Quarter</TD><TD>Quarter (1-4)</TD></TR>
+	<TR><TD>Origin</TD><TD>Origin Airport Code</TD></TR>
+	<TR><TD>OriginAirportID</TD><TD>Origin Airport, Airport ID. An identification number assigned by US DOT to identify a unique airport.  Use this field for airport analysis across a range of years because an airport can change its airport code and airport codes can be reused.</TD></TR>
+	<TR><TD>OriginAirportSeqID</TD><TD>Origin Airport, Airport Sequence ID. An identification number assigned by US DOT to identify a unique airport at a given point of time.  Airport attributes, such as airport name or coordinates, may change over time.</TD></TR>
+	<TR><TD>OriginCityMarketID</TD><TD>Origin Airport, City Market ID. City Market ID is an identification number assigned by US DOT to identify a city market.  Use this field to consolidate airports serving the same city market.</TD></TR>
+	<TR><TD>OriginCountry</TD><TD>Origin Airport, Country</TD></TR>
+	<TR><TD>OriginStateFips</TD><TD>Origin Airport, State FIPS</TD></TR>
+	<TR><TD>OriginState</TD><TD>Origin Airport, State</TD></TR>
+	<TR><TD>OriginStateName</TD><TD>Origin State Name</TD></TR>
+	<TR><TD>OriginWac</TD><TD>Origin Airport, World Area Code</TD></TR>
+	<TR><TD>RoundTrip</TD><TD>Round Trip Indicator (1=Yes)</TD></TR>
+	<TR><TD>OnLine</TD><TD>Single Carrier Indicator (1=Yes)</TD></TR>
+	<TR><TD>DollarCred</TD><TD>Dollar Credibility Indicator</TD></TR>
+	<TR><TD>FarePerMile</TD><TD>Itinerary Fare Per Miles Flown in Dollars (ItinFare/MilesFlown).</TD></TR>
+	<TR><TD>RPCarrier</TD><TD>Reporting Carrier</TD></TR>
+	<TR><TD>Passengers</TD><TD>Number of Passengers</TD></TR>
+	<TR><TD>ItinFare</TD><TD>Itinerary Fare Per Person</TD></TR>
+	<TR><TD>BulkFare</TD><TD>Bulk Fare Indicator (1=Yes)</TD></TR>
+	<TR><TD>Distance</TD><TD>Itinerary Distance (Including Ground Transport)</TD></TR>
+	<TR><TD>DistanceGroup</TD><TD>Distance Group, in 500 Mile Intervals</TD></TR>
+	<TR><TD>MilesFlown</TD><TD>Itinerary Miles Flown (Track Miles)</TD></TR>
+	<TR><TD>ItinGeoType</TD><TD>Itinerary Geography Type</TD></TR>
+	</TABLE>
+</BODY>
+</HTML>

@@ -1,0 +1,34 @@
+****************************************************************
+Prepared for Gabor's Data Analysis
+
+Data Analysis for Business, Economics, and Policy
+ by Gabor Bekes and  Gabor Kezdi
+ Cambridge University Press 2021
+ gabors-data-analysis.com 
+
+How to get the
+height-income-distribution dataset
+
+used in case study 3D Distributions of Body Height and Income
+
+
+****************************************************************
+Data source
+
+The Health and Retirement Study of the USA
+The University of Michigan Health and Retirement Study (HRS) is a longitudinal panel study that surveys a representative sample of approximately 20,000 people in America, supported by the National Institute on Aging (NIA U01AG009740) and the Social Security Administration. 
+https://hrs.isr.umich.edu/
+
+This data is from the public release longitudinal RAND-HRS datafile, which is a single (wide format) xt panel data table with the most important public-use variables from the HRS.
+Downloadable from here: https://hrsdata.isr.umich.edu/data-products/rand
+Description here: https://www.rand.org/well-being/social-and-behavioral-policy/centers/aging/dataprod/hrs-data.html
+
+****************************************************************
+Data access and copyright
+
+If you want to use this data, you need to register as a user of the HRS.
+Registering is fairly easy and can be done here: https://hrsdata.isr.umich.edu/user/register
+After registering, you can use not only the data table in our repo but the entire public release HRS dataset, including the RAND-HRS longitudinal file.
+
+See more about the conditions here: https://hrs.isr.umich.edu/data-products/access-to-public-data/conditions-of-use
+
