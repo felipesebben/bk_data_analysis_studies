@@ -81,36 +81,37 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService 
 from webdriver_manager.chrome import ChromeDriverManager 
 
-driver = webdriver.Chrome('C:/Users/Felipe/python_work/Projects/bk_data_analysis/da_data_repo/chromedriver.exe')
 # driver.maximize_window()
 time.sleep(8)
 options = webdriver.ChromeOptions() 
 options.headless = True 
 options.add_argument('--headless=new')
+driver = webdriver.Chrome('C:/Users/Felipe/python_work/Projects/bk_data_analysis/da_data_repo/chromedriver.exe', options=options)
 
 time.sleep(5)
 
+list_json = []
 
-def search_data(pages=2, region='POA'):
+def search_data(pages=2, manufacturer='hyundai', model='hb20'):
     # f'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/estado-rs/{region}'
-    search_state = {
-        'POA': 'regioes-de-porto-alegre-torres-e-santa-cruz-do-sul',
-        'SUL': 'regioes-de-pelotas-rio-grande-e-bage',
-        'NOR': 'regioes-de-caxias-do-sul-e-passo-fundo',
-        'CTR': 'regioes-de-santa-maria-uruguaiana-e-cruz-alta',
-        }
+    # search_state = {
+    #     'POA': 'regioes-de-porto-alegre-torres-e-santa-cruz-do-sul',
+    #     'SUL': 'regioes-de-pelotas-rio-grande-e-bage',
+    #     'NOR': 'regioes-de-caxias-do-sul-e-passo-fundo',
+    #     'CTR': 'regioes-de-santa-maria-uruguaiana-e-cruz-alta',
+    #     }
     for x in range(0, pages):
         print(f" Loop n.: {str(x)}")
-        url = f'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/estado-rs/{search_state[region]}'
+        url = f'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/{manufacturer}/{model}/estado-rs/'
         if x == 0:
             print('Only one page returned')
         else:
-            url=f'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/estado-rs/{search_state[region]}?o={str(x)}'
+            url=f'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/{manufacturer}/{model}/estado-rs?o={str(x)}'
         
         PARAMS = {
             'authority': 'olx.com.br',
             'method': 'GET',
-            'path': '/autos-e-pecas/carros-vans-e-utilitarios/estado-rs/regioes-de-porto-alegre-torres-e-santa-cruz-do-sul',
+            'path': f'/autos-e-pecas/carros-vans-e-utilitarios/{manufacturer}/{model}/estado-rs',
             'scheme': 'https',
             'referer': 'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/estado-rs',
             'sec-fetch-mode': 'navigate',
@@ -121,10 +122,11 @@ def search_data(pages=2, region='POA'):
         }
         page = requests.get(url=url, headers=PARAMS)
         soup = BeautifulSoup(page.content, 'lxml')
-        items = soup.find_all('li', {'class': 'sc-1fcmfeb-2 dvcyfD'})
-        # print(len(items))
         driver.get(url)
         sel_soup = BeautifulSoup(driver.page_source, 'lxml')
+        items = sel_soup.find_all('li', {'class': 'sc-1fcmfeb-2 dvcyfD'})
+        # print(len(items))
+        
         items_soup = sel_soup.find_all('li', {'class': 'sc-1fcmfeb-2 dvcyfD'})
         for item in items:
             try:
@@ -136,20 +138,61 @@ def search_data(pages=2, region='POA'):
                 post_day = post_date.split(',')[0].rstrip()
                 post_hour = post_date.split(',')[1].lstrip()
                 car_url = item.find('a')['href']
-                location = item.find_all('span', {'class': 'sc-1c3ysll-1 cLQXSQ sc-ifAKCX lgjPoE'})[0].contents[0]
-                print(location)
-
-            except:
-                print('Error')
-        for item_soup in items_soup:
-            try:
-                mileage = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[0].contents[0]
+                mileage = item.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[0].contents[0]
                 mileage = mileage.split('km')[0]
                 mileage = float(mileage.replace('.', ''))
-                year = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[1].contents[0]
-                gear = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[2].contents[0]
-                fuel = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[3].contents[0]
+                year = item.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[1].contents[0]
+                gear = item.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[2].contents[0]
+                fuel = item.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[3].contents[0]
+                location = item.find_all('span', {'class': 'sc-1c3ysll-1 cLQXSQ sc-ifAKCX lgjPoE'})[0].contents[0]
+                try:
+                    city = location.split(',')[0].rstrip()
+                except:
+                    city = location
+                try:
+                    district = location.split(',')[1].lstrip()
+                    district_clean = district.split(' ')[0].rstrip()
+                except:
+                    pass
+                # print(city)
+                # print(district)
+                # print('----')
+                json = {
+                    "car_model": car_name,
+                    "car_price": price,
+                    "date": post_day,
+                    "time": post_hour,
+                    "total_mileage": mileage,
+                    "year": year,
+                    "gear_type": gear,
+                    "fuel_type": fuel,
+                    "url": car_url,
+                    "city": city,
+                    "area": district_clean,
+                }
+                list_json.append(json)
             except:
                 print('Error')
-search_data(pages=2)
-
+        # for item_soup in items_soup:
+        #     try:
+        #         mileage = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[0].contents[0]
+        #         mileage = mileage.split('km')[0]
+        #         mileage = float(mileage.replace('.', ''))
+        #         year = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[1].contents[0]
+        #         gear = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[2].contents[0]
+        #         fuel = item_soup.find_all('span', {'class': 'sc-ifAKCX lgjPoE'})[3].contents[0]
+        #         # print(f'km veículo: {mileage}')
+        #         # print(f'ano veículo: {year}')
+        #         # print(f'câmbio veículo: {gear}')
+        #         # print(f'combustível veículo: {fuel}')
+        #         json_2 = {
+        #             "total_mileage": mileage,
+        #             "year": year,
+        #             "gear_type": gear,
+        #             "fuel_type": fuel,
+        #         }            
+        #         list_json.append(json_2)
+        #     except:
+        #         print('Error')
+search_data(pages=10)
+print(list_json)
