@@ -1,26 +1,20 @@
 import pandas as pd
 import numpy as np
-import requests
 import os
 from bs4 import BeautifulSoup
-import json
-from difflib import SequenceMatcher
 from selenium import webdriver
 import time
-from datetime import date
-import re
+import datetime
 from selenium import webdriver 
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 
+#  Get dirname and output path to store scraped data
 current_path = os.getcwd()
-print(current_path)
 dirname = f"{current_path}/da_data_exercises/ch01-origins_of_data/"
 output = f"{dirname}data/output/"
 
-
-time.sleep(8)
+# Set the options for the selenium webdriver and install the driver
 option = webdriver.ChromeOptions() 
 option.add_argument('--headless')
 option.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36')
@@ -29,10 +23,16 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 time.sleep(5)
 
+#  Create empty list in which the data will be stored
 list_json = []
 
 def search_data(pages, manufacturer, model):
+    """
+    Access a url for car ads, extracts relevant data properly formated,
+    and stores it in a json file.
+    """
     for x in range(0, pages):
+        # Define two different urls as the webpage uses pagination
         print(f" Loop n.: {str(x)}")
         url = f'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/{manufacturer}/{model}/estado-rs/'
         if x == 0:
@@ -40,26 +40,13 @@ def search_data(pages, manufacturer, model):
         else:
             url=f'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/{manufacturer}/{model}/estado-rs?o={str(x)}'
         
-        PARAMS = {
-            'authority': 'olx.com.br',
-            'method': 'GET',
-            'path': f'/autos-e-pecas/carros-vans-e-utilitarios/{manufacturer}/{model}/estado-rs',
-            'scheme': 'https',
-            'referer': 'https://www.olx.com.br/autos-e-pecas/carros-vans-e-utilitarios/estado-rs',
-            'sec-fetch-mode': 'navigate',
-            'sec-fetch-site': 'same-origin',
-            'sec-fetch-user': '?1',
-            'upgrade-insecure-requests': '1',
-            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
-        }
-        # page = requests.get(url=url, headers=PARAMS)
-        # soup = BeautifulSoup(page.content, 'lxml')
+        # Access the url with selenium
         driver.get(url)
+        # Parse each page and get the main element that contains the data
         sel_soup = BeautifulSoup(driver.page_source, 'lxml')
         items = sel_soup.find_all('li', {'class': 'sc-1fcmfeb-2 dvcyfD'})
-        # print(len(items))
         
-        # items_soup = sel_soup.find_all('li', {'class': 'sc-1fcmfeb-2 dvcyfD'})
+        # Loop through each element and discard others that are ads using try-except
         for item in items:
             try:
                 car_name = item.find_all('h2')[0].contents[0]
@@ -87,9 +74,8 @@ def search_data(pages, manufacturer, model):
                     district_clean = district.split('-')[0].rstrip()
                 except:
                     pass
-                # print(city)
-                # print(district)
-                # print('----')
+                
+                # Store the content in a json dict and append each observation to the empty list
                 json = {
                     "car_model": car_name,
                     "car_price": price,
@@ -103,13 +89,19 @@ def search_data(pages, manufacturer, model):
                     "city": city_clean,
                     "area": district_clean,
                 }
+                
                 list_json.append(json)
             except:
                 pass
        
-search_data(10,'hyundai', 'hb20')
+search_data(15,'hyundai', 'hb20')
 
-
+# Convert the json to a pandas DataFrame
 df_cars = pd.DataFrame(list_json)
 
+# Replace strings that represent "today" and "yesterday" to equivalent dates
+df_cars['date'].mask(df_cars['date'] == 'Hoje', datetime.date.today(), inplace=True)
+df_cars['date'].mask(df_cars['date'] == 'Ontem', datetime.date.today() - datetime.timedelta(days=1), inplace=True)
+
+# Export the data to a csv for later use
 df_cars.to_csv(f"{output}WS_car_prices.csv", index=False)
