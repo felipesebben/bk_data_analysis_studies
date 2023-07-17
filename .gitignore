@@ -5,4 +5,5 @@ bk_data_analysis.code-workspace
 *.yaml
 *.twbr
 *.twbx
-/da_data_repo
+/da_data_repo/
+da_data_repo/*
