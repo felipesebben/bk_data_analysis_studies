@@ -1,9 +1,9 @@
 /data_analysis
 /da_case_studies-reference
+/da_data_repo
 .R
 bk_data_analysis.code-workspace
 *.yaml
 *.twbr
 *.twbx
-/da_data_repo/
-da_data_repo/*
+
