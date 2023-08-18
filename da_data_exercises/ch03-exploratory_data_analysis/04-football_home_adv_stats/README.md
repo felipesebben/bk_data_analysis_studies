@@ -1,15 +1,35 @@
-<h1>Chapter 3 | Data Exercise #2 | EDA with data on used cars</h1>
+<h1>Chapter 3 | Data Exercise #2 | <code>football</code> dataset | Alternative statistics </h1>
 <h2>Introduction:</h2>
-<p>In this notebook, you will find my notes and code for Chapter 3's <b>exercise 2</b> of the book <a href="https://gabors-data-analysis.com/">Data Analysis for Business, Economics, and Policy</a>, by Gábor Békés and Gábor Kézdi. The question was: 
-<p>1. Pick another season from the <code>football</code> dataset.</p>
+<p>In this notebook, you will find my notes and code for Chapter 3's <b>exercise 4</b> of the book <a href="https://gabors-data-analysis.com/">Data Analysis for Business, Economics, and Policy</a>, by Gábor Békés and Gábor Kézdi. The question was: 
+<p>4. Choose the same 2016/2017 season from the <code>football</code> dataset..</p>
 <p>Assignments:</p>
 <ul>
-    <li>Examine the extent of home team advantage in similar ways to our case study.</li>
+    <li>Produce a different table with possibly different statistics to show the extent of home team advantage.</li>
     <li>Compare the results and discuss what you find.</li>
 </ul>
 <h2>Comments:</h2>
-<p>This was an interesting data exercise. I read, filtered and plotted data from two different football league seasons. Then, I compared both results and made observations on changes between each of their distributions.</p>
-<p>I decided to pick season 2017/2018 to compare with the book's case study, which used season 2016/2017.</p>
-<p>My conclusion was that while we could observe a home team advantage in season 2017/2018, it was not as great as the previous season. There was a lower proportion of wins at home, an increased number of games ending in a draw, and a lower proportion of games with a higher goal difference, which hints at more competitive matches.</p> 
+<p>I took advantage of this exercise to review some alternative estimates. Besides calculating them, I gave a brief description of their characteristics and definitions.</p>
+<p>I divided the estimates into three different sessions according to their type:</p>
+<ul>
+<li>Central value (location)</li>
+<ul>
+<li>Mean</li>
+<li>Trimmed mean</li>
+<li>Weighted mean</li>
+<li>Median</li>
+<li>Weighted median</li>
+</ul>
+</ul>
+<ul>
+<li>Spread (variation)</li>
+<ul>
+<li>Range</li>
+<li>Inter-quartile range</li>
+<li>Deviation</li>
+<li>Median absolute deviation from the median</li>
+</ul>
+<li>Skewness</li>
+</ul></p>
+<p>Then, I created a table describing those statistics to replicate the one found in the book's case study. I discussed the differences between these alternative estimates and those used in the original exercise.</p> 
 <p>I hope you enjoy it and feel free to contact me!</p>
 <hr>
