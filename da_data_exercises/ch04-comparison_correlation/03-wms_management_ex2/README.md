@@ -1,7 +1,7 @@
 <h1>Chapter 4 | Data Exercise #3 | <code>wms-management-survey</code> | Comparison and correlation</h1>
 <h2>Introduction:</h2>
 <p>In this notebook, you will find my notes and code for Chapter 4's <b>exercise 3</b> of the book <a href="https://gabors-data-analysis.com/">Data Analysis for Business, Economics, and Policy</a>, by Gábor Békés and Gábor Kézdi. The question was: 
-<p>2. Using the <code>wms-management-survey</code> dataset:</p>
+<p>3. Using the <code>wms-management-survey</code> dataset:</p>
 <p>Assignments:</p>
 <ul>
     <li>Pick a country of your choice.</li>
