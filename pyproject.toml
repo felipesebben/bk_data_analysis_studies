@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "bk-data-analysis"
+version = "0.1.0"
+description = ""
+authors = ["Felipe Sebben <felipesebben@yahoo.com.br>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.3"
+numpy = "^2.0.0"
+pandas = "^2.2.2"
+plotnine = "^0.13.6"
+scipy = "^1.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
