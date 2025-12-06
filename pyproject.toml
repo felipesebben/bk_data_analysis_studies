@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11.3"
+python = "^3.11"
 numpy = "^2.0.0"
 pandas = "^2.2.2"
 plotnine = "^0.13.6"
@@ -15,6 +15,7 @@ scipy = "^1.14.0"
 python-dotenv = "^1.0.1"
 yfinance = "^0.2.40"
 matplotlib = ">=3.8.0,<3.9.1"
+ipykernel = "^7.1.0"
 
 
 [build-system]
