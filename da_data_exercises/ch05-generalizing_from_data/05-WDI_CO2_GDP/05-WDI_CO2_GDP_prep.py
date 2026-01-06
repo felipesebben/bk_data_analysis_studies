@@ -58,13 +58,19 @@ df_final = df_final.drop(columns="time").reset_index(drop=True)
 # Keep latest data for each country
 df_final = df_final.drop_duplicates(subset="Country_ISO", keep="first")
 
-# 1. Prepare the "Observed World" Dataset
-df_tableau = df_final.copy()
+# 1. Cleaning ---
+print("--- Step 1: Cleaning ---")
+# Drop Palau (Extreme outlier – see notebook)
+df_clean = df_final[df_final["Country"] != "Palau"].copy()
+print(f"Dropped Palau.\nNew Max CO2: {df_clean["CO2_Capita"].max():.2f} ({df_clean.loc[df_clean["CO2_Capita"].idxmax()]["Country"]})")
 
-# 1.1 Recalculate the Median for the final label
+# 2. Prepare the "Observed World" Dataset
+df_tableau = df_clean.copy()
+
+# 2.1 Recalculate the Median for the final label
 median_gdp = df_tableau["GDP_PPP"].median()
 
-# 1.2 Assign groups
+# 2.2 Assign groups
 df_tableau["Income_Group"] = np.where(
     df_tableau["GDP_PPP"] > median_gdp,
     "Higher Income",
@@ -76,7 +82,7 @@ df_tableau["Income_Group"] = np.where(
 df_tableau.to_csv(f"{data_out}co_gdp_countries.csv", index=False)
 print(f"File 1 Saved: 'co2_gdp_countries.csv ({len(df_tableau)} countries)")
 
-# 2. Prepare the "Bootstrap Simulation" Dataset
+# 3. Prepare the "Bootstrap Simulation" Dataset
 
 def generate_boostrap_data(df, n_iterations=3000):
     stats = []
@@ -104,7 +110,8 @@ def generate_boostrap_data(df, n_iterations=3000):
     
     return pd.DataFrame(stats)
 
+n_iterations = 3000
 # Run and Save
-df_sim = generate_boostrap_data(df_final)
+df_sim = generate_boostrap_data(df_final, n_iterations=n_iterations)
 df_sim.to_csv(f"{data_out}bootstrap_simulation.csv", index=False)
-print(f"File 2 Saved! 'boostrap_simulation.csv")
+print(f"File 2 Saved! 'boostrap_simulation.csv ({n_iterations} iterations)" )
