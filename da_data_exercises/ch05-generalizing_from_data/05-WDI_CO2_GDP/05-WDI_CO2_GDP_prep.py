@@ -85,6 +85,7 @@ print(f"File 1 Saved: 'co2_gdp_countries.csv ({len(df_tableau)} countries)")
 # 3. Prepare the "Bootstrap Simulation" Dataset
 
 def generate_boostrap_data(df, n_iterations=3000):
+    np.random.seed(42)
     stats = []
     n_obs = len(df)
     gdp_data = df["GDP_PPP"].values
@@ -112,6 +113,6 @@ def generate_boostrap_data(df, n_iterations=3000):
 
 n_iterations = 3000
 # Run and Save
-df_sim = generate_boostrap_data(df_final, n_iterations=n_iterations)
+df_sim = generate_boostrap_data(df_clean, n_iterations=n_iterations)
 df_sim.to_csv(f"{data_out}bootstrap_simulation.csv", index=False)
 print(f"File 2 Saved! 'boostrap_simulation.csv ({n_iterations} iterations)" )
