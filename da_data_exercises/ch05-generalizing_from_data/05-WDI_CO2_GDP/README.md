@@ -7,7 +7,7 @@
  
 <figcaption><i>Final Report in Tableau Public. <a href="https://public.tableau.com/app/profile/felipe.sebben/viz/GeneralizingfromDataCO2PerCapitaEmissions/DataAnalysisGeneralizingfromData?publish=yes"> Click here to explore the interactive version on Tableau Public</a>.</i></figcaption>
 </figure>
----
+
 
 ## Overview
 
