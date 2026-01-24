@@ -1,9 +1,12 @@
 # The Carbon Cost of Wealth
 ### Do wealthy nations structurally emit more CO2? A statistical analysis of global inequality.
 
-![Dashboard Preview](da_data_exercises\ch05-generalizing_from_data\05-WDI_CO2_GDP\assets\snapshot.png)
-> *Snapshot of the final dashboard. [Click here to explore the interactive version on Tableau Public]([[INSERT_YOUR_TABLEAU_PUBLIC_URL_HERE]](https://public.tableau.com/app/profile/felipe.sebben/viz/GeneralizingfromDataCO2PerCapitaEmissions/DataAnalysisGeneralizingfromData?publish=yes)).*
+<figure>
+<img src="./assets/snapshot.png" width="80%" alt="Report in Tableau Public" />
 
+ 
+<figcaption><i>Final Report in Tableau Public. <a href="https://public.tableau.com/app/profile/felipe.sebben/viz/GeneralizingfromDataCO2PerCapitaEmissions/DataAnalysisGeneralizingfromData?publish=yes"> Click here to explore the interactive version on Tableau Public</a>.</i></figcaption>
+</figure>
 ---
 
 ## Overview
