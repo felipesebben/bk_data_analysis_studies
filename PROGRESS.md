@@ -2,7 +2,7 @@
 
 Resume point for study sessions. Update it at the end of each session: what was finished, and the very next step.
 
-Legend: ✅ done · 🟡 in progress · ⬜ not started
+Legend: done / in progress / todo
 
 ## Now
 
@@ -17,29 +17,29 @@ Ideas parked for after the questions:
 
 | Ch | Topic | Case studies | Data exercises | Practice Qs | Real-world project |
 |----|-------|--------------|----------------|-------------|--------------------|
-| 01 | Origins of data | ✅ hotels data collect | ✅ 01, 04 | ✅ | — |
-| 02 | Preparing data for analysis | ✅ hotels prep, immunization, football managers | ✅ 01, 02, 04, 05 | ✅ | ✅ Brazilian football managers (EXTRA) |
-| 03 | Exploratory data analysis | ✅ all 5 | ✅ 01–05 | ✅ | ✅ Brazilian football EDA (Tableau), Brazilian city sizes |
-| 04 | Comparison and correlation | ✅ management & firm size | ✅ 01–05 | ✅ | ✅ football team performance |
-| 05 | Generalizing from data | ✅ stock market loss | ✅ 01, 03, 04, 05 | ✅ | ✅ CO2 vs GDP (WDI, Tableau) |
-| 06 | Testing hypotheses | ✅ 6.A1 online/offline prices · ⬜ 6.B1 stock market loss test | ⬜ | 🟡 Q1–7 done, Q8 next | ⬜ |
-| 07 | Simple regression | ⬜ | ⬜ | ⬜ | ⬜ |
-| 08 | Complicated patterns and messy data | ⬜ | ⬜ | ⬜ | ⬜ |
-| 09 | Generalizing results of a regression | ⬜ | ⬜ | ⬜ | ⬜ |
-| 10 | Multiple linear regression | ⬜ | ⬜ | ⬜ | ⬜ |
-| 11 | Modeling probabilities | ⬜ | ⬜ | ⬜ | ⬜ |
-| 12 | Regression with time series data | ⬜ | ⬜ | ⬜ | ⬜ |
-| 13 | A framework for prediction | ⬜ | ⬜ | ⬜ | ⬜ |
-| 14 | Model building for prediction | ⬜ | ⬜ | ⬜ | ⬜ |
-| 15 | Regression trees | ⬜ | ⬜ | ⬜ | ⬜ |
-| 16 | Random forest and boosting | ⬜ | ⬜ | ⬜ | ⬜ |
-| 17 | Probability prediction and classification | ⬜ | ⬜ | ⬜ | ⬜ |
-| 18 | Forecasting from time series data | ⬜ | ⬜ | ⬜ | ⬜ |
-| 19 | A framework for causal analysis | ⬜ | ⬜ | ⬜ | ⬜ |
-| 20 | Designing and analyzing experiments | ⬜ | ⬜ | ⬜ | ⬜ |
-| 21 | Regression and matching with observational data | ⬜ | ⬜ | ⬜ | ⬜ |
-| 22 | Difference-in-differences | ⬜ | ⬜ | ⬜ | ⬜ |
-| 23 | Methods for panel data | ⬜ | ⬜ | ⬜ | ⬜ |
-| 24 | Appropriate control groups for panel data | ⬜ | ⬜ | ⬜ | ⬜ |
+| 01 | Origins of data | done: hotels data collect | done: 01, 04 | done | — |
+| 02 | Preparing data for analysis | done: hotels prep, immunization, football managers | done: 01, 02, 04, 05 | done | done: Brazilian football managers (EXTRA) |
+| 03 | Exploratory data analysis | done: all 5 | done: 01–05 | done | done: Brazilian football EDA (Tableau), Brazilian city sizes |
+| 04 | Comparison and correlation | done: management & firm size | done: 01–05 | done | done: football team performance |
+| 05 | Generalizing from data | done: stock market loss | done: 01, 03, 04, 05 | done | done: CO2 vs GDP (WDI, Tableau) |
+| 06 | Testing hypotheses | done: 6.A1 online/offline prices · todo: 6.B1 stock market loss test | todo | in progress: Q1–7 done, Q8 next | todo |
+| 07 | Simple regression | todo | todo | todo | todo |
+| 08 | Complicated patterns and messy data | todo | todo | todo | todo |
+| 09 | Generalizing results of a regression | todo | todo | todo | todo |
+| 10 | Multiple linear regression | todo | todo | todo | todo |
+| 11 | Modeling probabilities | todo | todo | todo | todo |
+| 12 | Regression with time series data | todo | todo | todo | todo |
+| 13 | A framework for prediction | todo | todo | todo | todo |
+| 14 | Model building for prediction | todo | todo | todo | todo |
+| 15 | Regression trees | todo | todo | todo | todo |
+| 16 | Random forest and boosting | todo | todo | todo | todo |
+| 17 | Probability prediction and classification | todo | todo | todo | todo |
+| 18 | Forecasting from time series data | todo | todo | todo | todo |
+| 19 | A framework for causal analysis | todo | todo | todo | todo |
+| 20 | Designing and analyzing experiments | todo | todo | todo | todo |
+| 21 | Regression and matching with observational data | todo | todo | todo | todo |
+| 22 | Difference-in-differences | todo | todo | todo | todo |
+| 23 | Methods for panel data | todo | todo | todo | todo |
+| 24 | Appropriate control groups for panel data | todo | todo | todo | todo |
 
 Practice-question status for ch01–05 is assumed done; correct it if not.
