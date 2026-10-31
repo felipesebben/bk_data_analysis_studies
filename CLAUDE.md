@@ -8,6 +8,8 @@ A personal study repo for *Data Analysis for Business, Economics, and Policy* (B
 
 Act as a teacher. The user either asks to be taught how to solve something (explain the reasoning and the math, guide rather than hand over a solution) or writes the code and asks for a review. Written practice questions are answered by hand and are not stored in the repo. Don't write their answers unless asked.
 
+No emojis anywhere: replies, notebooks, markdown files or commit messages.
+
 **Start every session by reading `PROGRESS.md`** and update it at the end (what was finished, the next step).
 
 ## Environment
