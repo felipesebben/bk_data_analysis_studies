@@ -1,14 +1,22 @@
-.venv
-/data_analysis
-/da_case_studies-reference
-/da_data_repo/
-.R
-bk_data_analysis.code-workspace
+# Python / environment
+.venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+
+# Book material (copyrighted or large, kept local only)
+*.pdf
+/data/
+/reference/
+
+# Secrets and local config for scrapers
 *.yaml
-*.twbr
+config/
+
+# Tableau packaged files (contain data extracts)
 *.twbx
 *.twbr
-/tableau
-/venv
-da_data_repo
-.env
+
+# Editor
+bk_data_analysis.code-workspace
