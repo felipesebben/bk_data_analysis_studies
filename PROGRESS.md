@@ -6,7 +6,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started
 
 ## Now
 
-**Chapter 6, Testing Hypotheses.** Case studies 6.A1 and 6.B1 done. Next code work: Data Exercise 4 (sp500, own loss definition), then Ex 1, 2, 3, 5. Practice questions: Q1–Q7 done (worked by hand). **Next: Q8 (p-hacking and how to minimize its perils, with an example)**, then Q9 (p-hacking's effect on the published literature), then the applied Q10–Q15 (Q14–Q15 are computable t-test questions).
+**Chapter 6, Testing Hypotheses.** Case studies 6.A1 and 6.B1 done. Data exercise skeletons for Ex 1-5 are in `chapters/ch06-testing_hypotheses/exercises/`. **Next code work: Exercise 4** (sp500): pick the loss size and tolerated frequency (the real 3% count is 50 days, about 1.99%), then Ex 1, 2, 3, 5. Mode for ch06: code walked through cell by cell in chat. Practice questions: Q1–Q7 done (worked by hand). **Next: Q8 (p-hacking and how to minimize its perils, with an example)**, then Q9 (p-hacking's effect on the published literature), then the applied Q10–Q15 (Q14–Q15 are computable t-test questions).
 
 Ideas parked for after the questions:
 - Simulate 20 or 100 true-null t-tests and plot the p-value distribution and the share below 0.05 (illustrates multiple testing, Q7).
