@@ -6,7 +6,7 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started
 
 ## Now
 
-**Chapter 6, Testing Hypotheses.** Practice questions: Q1–Q7 done (worked by hand). **Next: Q8 (p-hacking and how to minimize its perils, with an example)**, then Q9 (p-hacking's effect on the published literature), then the applied Q10–Q15 (Q14–Q15 are computable t-test questions).
+**Chapter 6, Testing Hypotheses.** Case studies 6.A1 and 6.B1 done. Next code work: Data Exercise 4 (sp500, own loss definition), then Ex 1, 2, 3, 5. Practice questions: Q1–Q7 done (worked by hand). **Next: Q8 (p-hacking and how to minimize its perils, with an example)**, then Q9 (p-hacking's effect on the published literature), then the applied Q10–Q15 (Q14–Q15 are computable t-test questions).
 
 Ideas parked for after the questions:
 - Simulate 20 or 100 true-null t-tests and plot the p-value distribution and the share below 0.05 (illustrates multiple testing, Q7).
@@ -22,7 +22,7 @@ Ideas parked for after the questions:
 | 03 | Exploratory data analysis | ✅ all 5 | ✅ 01–05 | ✅ | ✅ Brazilian football EDA (Tableau), Brazilian city sizes |
 | 04 | Comparison and correlation | ✅ management & firm size | ✅ 01–05 | ✅ | ✅ football team performance |
 | 05 | Generalizing from data | ✅ stock market loss | ✅ 01, 03, 04, 05 | ✅ | ✅ CO2 vs GDP (WDI, Tableau) |
-| 06 | Testing hypotheses | ✅ 6.A1 online/offline prices · ⬜ 6.B1 stock market loss test | ⬜ | 🟡 Q1–7 done, Q8 next | ⬜ |
+| 06 | Testing hypotheses | ✅ 6.A1 online/offline prices · ✅ 6.B1 stock market loss test | ⬜ | 🟡 Q1–7 done, Q8 next | ⬜ |
 | 07 | Simple regression | ⬜ | ⬜ | ⬜ | ⬜ |
 | 08 | Complicated patterns and messy data | ⬜ | ⬜ | ⬜ | ⬜ |
 | 09 | Generalizing results of a regression | ⬜ | ⬜ | ⬜ | ⬜ |
