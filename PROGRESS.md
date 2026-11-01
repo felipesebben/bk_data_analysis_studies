@@ -22,7 +22,7 @@ Ideas parked for after the questions:
 | 03 | Exploratory data analysis | ✅ all 5 | ✅ 01–05 | ✅ | ✅ Brazilian football EDA (Tableau), Brazilian city sizes |
 | 04 | Comparison and correlation | ✅ management & firm size | ✅ 01–05 | ✅ | ✅ football team performance |
 | 05 | Generalizing from data | ✅ stock market loss | ✅ 01, 03, 04, 05 | ✅ | ✅ CO2 vs GDP (WDI, Tableau) |
-| 06 | Testing hypotheses | ✅ 6.A1 online/offline prices · ✅ 6.B1 stock market loss test | ⬜ | 🟡 Q1–7 done, Q8 next | ⬜ |
+| 06 | Testing hypotheses | ✅ 6.A1 online/offline prices · ✅ 6.B1 stock market loss test | 🟡 skeletons for 1–5 ready | 🟡 Q1–7 done, Q8 next | ⬜ |
 | 07 | Simple regression | ⬜ | ⬜ | ⬜ | ⬜ |
 | 08 | Complicated patterns and messy data | ⬜ | ⬜ | ⬜ | ⬜ |
 | 09 | Generalizing results of a regression | ⬜ | ⬜ | ⬜ | ⬜ |
