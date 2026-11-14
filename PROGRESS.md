@@ -8,6 +8,8 @@ Legend: ✅ done · 🟡 in progress · ⬜ not started
 
 **Chapter 6, Testing Hypotheses.** Case studies 6.A1 and 6.B1 done. Data exercise skeletons for Ex 1-5 are in `chapters/ch06-testing_hypotheses/exercises/`. **In progress: Exercise 1** (billion-prices, another country), which the user is writing on their own. Status: checking how `PRICETYPE` and `sale_online` are filled per country (`value_counts(dropna=False)`, `crosstab` with `fillna("missing")`, share missing via `groupby(...).agg(lambda s: s.isna().mean())`). Key facts: `PRICETYPE` is filled only for the USA, BRAZIL, CHINA, GERMANY, JAPAN and SOUTHAFRICA, and is fully missing for ARGENTINA, AUSTRALIA, CANADA and the UK, so the 6.A1 filter would wipe those countries out. `sale_online` is coded 1/NaN only, so NaN may mean "not on sale". Next: pick the country and a replacement filter, then run the test. After that: Ex 4 (sp500: pick the loss size and tolerated frequency; the real 3% count is 50 days, about 1.99%), then Ex 2, 3, 5. Mode for ch06: code walked through cell by cell in chat. Practice questions: Q1–Q7 done (worked by hand). **Next: Q8 (p-hacking and how to minimize its perils, with an example)**, then Q9 (p-hacking's effect on the published literature), then the applied Q10–Q15 (Q14–Q15 are computable t-test questions).
 
+**Real-world project: data centers and the 2026 midterms** (`projects/data_centers_midterms/`, branch `ch06/project-data-centers`). Question: did Republicans lose more House vote share (2024 → 2026, two-party, county level) in counties that host data centers? Plan and data model are in `BRIEF.md`. Mode: Claude is instructor only and writes no code unless asked. **Next: Task 1, pre-registration.** The user writes `README.md` covering the question, unit (county quirks), outcome definition (counties split across districts, uncontested races), main and robustness treatment definitions, H₀/H₁ and why one-sided, α and equal vs. unequal variances, the state inclusion rule, and what would count as no evidence. Then Task 2: check which states publish county-level 2026 provisional House results (the main data risk).
+
 Ideas parked for after the questions:
 - Simulate 20 or 100 true-null t-tests and plot the p-value distribution and the share below 0.05 (illustrates multiple testing, Q7).
 - Simulate a power vs. sample-size curve for a fixed true effect (Q5).
@@ -22,7 +24,7 @@ Ideas parked for after the questions:
 | 03 | Exploratory data analysis | ✅ all 5 | ✅ 01–05 | ✅ | ✅ Brazilian football EDA (Tableau), Brazilian city sizes |
 | 04 | Comparison and correlation | ✅ management & firm size | ✅ 01–05 | ✅ | ✅ football team performance |
 | 05 | Generalizing from data | ✅ stock market loss | ✅ 01, 03, 04, 05 | ✅ | ✅ CO2 vs GDP (WDI, Tableau) |
-| 06 | Testing hypotheses | ✅ 6.A1 online/offline prices · ✅ 6.B1 stock market loss test | 🟡 skeletons for 1–5 ready | 🟡 Q1–7 done, Q8 next | ⬜ |
+| 06 | Testing hypotheses | ✅ 6.A1 online/offline prices · ✅ 6.B1 stock market loss test | 🟡 skeletons for 1–5 ready | 🟡 Q1–7 done, Q8 next | 🟡 data centers & 2026 midterms (pre-registration) |
 | 07 | Simple regression | ⬜ | ⬜ | ⬜ | ⬜ |
 | 08 | Complicated patterns and messy data | ⬜ | ⬜ | ⬜ | ⬜ |
 | 09 | Generalizing results of a regression | ⬜ | ⬜ | ⬜ | ⬜ |
