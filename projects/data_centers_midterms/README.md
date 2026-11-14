@@ -4,6 +4,21 @@ Written on 2026-11-14, before looking at any 2026 results. The commit date of th
 
 The full project plan and data model are in [BRIEF.md](BRIEF.md).
 
+## Project layout
+
+| Path | What it holds |
+|------|---------------|
+| `README.md` | This pre-registration |
+| `BRIEF.md` | Project plan, data model, stages, visualization plan |
+| `docs/data_availability.md` | Task 2: which states publish county-level results, and where |
+| `docs/data_quality_notes.md` | One note per source, plus the dropped-observations log |
+| `docs/data_dictionary.md` | Columns of every table in the data model |
+| `docs/dag.md` | The causal diagram and what it means for each stage |
+| `notebooks/01_collect.ipynb` … `05_robustness.ipynb` | Collect, prepare, explore, test, robustness |
+| `scripts/` | Repeatable downloads, the R hex grid, the Tableau Hyper export |
+| `data/raw/`, `data/clean/` | Downloaded and cleaned data (gitignored) |
+| `output/` | Figures and tables |
+
 ## 1. Question
 
 Did the change in the Republican House vote share from 2024 to 2026 differ between US counties that host data centers and counties that don't?
