@@ -22,7 +22,7 @@ Tip: Clarity (Scytl) results pages have `clarityelections.com` in the URL. State
 
 | State | Source (MEDSL precinct / OpenElections / state site) | Link | By county, or must be aggregated? | Notes |
 |-------|------------------------------------------------------|------|-----------------------------------|-------|
-| Virginia |  MEDSL | https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi%3A10.7910%2FDVN%2FNYTPDU&version=&q=&fileTypeGroupFacet=&fileAccess=&fileSortField=name&fileSortOrder=desc&tagPresort=true&folderPresort=true#| County | |
+| Virginia | MEDSL | https://doi.org/10.7910/DVN/NYTPDU | Precinct; must be added up by county using `county_fips` | doi:10.7910/DVN/NYTPDU, version 1.0, file 2024-va-precinct-general, license CC0 1.0, 2026-11-20. |
 | Texas | | | | |
 | Georgia | | | | |
 | Ohio | | | | |

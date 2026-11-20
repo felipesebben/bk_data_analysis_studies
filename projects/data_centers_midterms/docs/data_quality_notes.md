@@ -16,13 +16,14 @@ For each source answer:
 
 ## 2026 House results (state election offices)
 
-- What it is:
-- Coverage:
-- Unit and level:
-- How it was collected:
+- What it is: , version 1.0, file 2024-va-precinct-general, license CC0 1.0, date.
+- Coverage: State-wide results for each state. Check individual states for status of whether results are official or not.
+- Unit and level: It may vary across states.
+- How it was collected: CSV file manually downloaded.
 - Possible biases:
-- Download:
+- Download: doi:10.7910/DVN/NYTPDU
 - Known problems found:
+  - S
 
 ## 2024 House results
 
@@ -30,9 +31,11 @@ For each source answer:
 - Coverage: results for all states in 2024. Each file has every race (president, Senate, state races).
 - Unit and level: precinct level, but each row also has the FIPS code, county and state.
 - How it was collected: MEDSL collected the official results from each state and county, converted them to one format and checked them against official totals (according to the GitHub notes). It is a secondary source: the numbers are a copy of the official numbers. Downloaded as one CSV file per state.
-- Possible biases: `votes` may contain the string `*` where small jurisdictions redact vote counts to prevent identifying voters. Small counties could then be left out. In pandas, the column will be read as a string column, so the numbers will be treated as text and it will likely count distinct values instead of summing them.
-- Download:
+- Possible biases: `votes` may contain the string `*` where small jurisdictions redact vote counts to prevent identifying voters. This could lead to totals being undercounted for counties, which can bias their share if the redacted votes lean one way. In pandas, the column will be read as a string column, so the numbers will be treated as text and it will likely count distinct values instead of summing them.
+  - Quick check: Virginia sample does not contain any `*` in `US HOUSE` rows.
+- Download: https://doi.org/10.7910/DVN/NYTPDU (version 1.0, file `2024-va-precinct-general`, license CC0 1.0, downloaded 2026-11-20)
 - Known problems found:
+  - District codes have 3 digits here, while Virginia's 2026 results store them as a single digit. Standardize before joining.
 
 ### Comments
 
