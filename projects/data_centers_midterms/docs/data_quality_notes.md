@@ -26,11 +26,11 @@ For each source answer:
 
 ## 2024 House results
 
-- What it is: Harvard Dataverse dataset with the 2024 general election results, including House elections.
+- What it is: precinct-level 2024 general election returns compiled by MEDSL (MIT Election Data and Science Lab), hosted on Harvard Dataverse.
 - Coverage: results for all states in 2024. Each file has every race (president, Senate, state races).
 - Unit and level: precinct level, but each row also has the FIPS code, county and state.
-- How it was collected: downloaded as one CSV file per state.
-- Possible biases: none so far.
+- How it was collected: MEDSL collected the official results from each state and county, converted them to one format and checked them against official totals (according to the GitHub notes). It is a secondary source: the numbers are a copy of the official numbers. Downloaded as one CSV file per state.
+- Possible biases: `votes` may contain the string `*` where small jurisdictions redact vote counts to prevent identifying voters. Small counties could then be left out. In pandas, the column will be read as a string column, so the numbers will be treated as text and it will likely count distinct values instead of summing them.
 - Download:
 - Known problems found:
 
@@ -41,10 +41,15 @@ For each source answer:
 - `mode`: the voting mode. It is set to `TOTAL` when the results are not broken down by mode.
   - The Virginia 2024 file doesn't break results down by mode: `mode` is only `TOTAL`.
 - Party fields:
-  - `party_detailed`: the candidate's detailed party. In states with fusion voting, such as New York, a candidate can run on several party lines, and these are reported as such. Blank for ballot measures.
+  - `party_detailed`: the candidate's detailed party. In states with fusion voting, such as New York, a candidate can run on several party lines, and these are reported as such. 
   - `party_simplified`: standardized party label.
-  - Which field we'll use: `party_simplified`, because it standardizes party names across states. Also, it is our reference for ballot measures.
+  - Which field we'll use: `party_simplified`, because it standardizes party names across states. 
 - `candidate`: candidate name, standardized within each state. Overvotes and undervotes must be removed, because they are invalid votes and are not part of the final count. Should write-ins be excluded? States seem to have different rules on how they count them.
+  - Our outcome is R / (R + D), so we can safely ignore write-ins.
+- `special`: boolean flag for special elections. In Virginia, `TRUE` returns local elections such as school board members. We should keep `FALSE` and/or filter `office` to `US HOUSE`.
+- `stage`: string with the stage of the election. When `office` = `US HOUSE`, it is only `GEN`.
+- `district`: district identifier. Values differ by election. For `US HOUSE`, it is zero-padded to 3 digits.
+- `magnitude`: numeric; the number of candidates a voter may select for an office. Can be more than 1. In Virginia, `US HOUSE` rows have only 1.
 
 ## 2020 and 2022 House results (placebo)
 
