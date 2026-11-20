@@ -16,15 +16,22 @@ For each source answer:
 
 ## 2026 House results (state election offices)
 
-- What it is: , version 1.0, file 2024-va-precinct-general, license CC0 1.0, date.
+- What it is: official election-night results published by each state's election office. They stay unofficial (provisional) until the state certifies them.
+  - Virginia: Virginia Department of Elections results site, one CSV with all races.
 - Coverage: statewide results for each state. Check each state's status (official or not).
 - Unit and level: may vary across states.
+  - Virginia: precinct level, with locality (county or independent city) and district IDs.
 - How it was collected: CSV file downloaded manually.
-- Possible biases:
-- Download: doi:10.7910/DVN/NYTPDU
+- Possible biases: provisional numbers can change until certification, so the download date matters.
+- Download:
+  - Virginia: https://enr.elections.virginia.gov/cdn/results/d2c804ee-4ec2-46bb-91d7-5b41526eab03/Election%20Results_ab226c36-0939-4ded-a2a0-84d95c8b7ae3.csv (checked 2026-11-20; the site says last updated 2026-11-19). The file name contains random codes, so the link may change when results are updated.
 - Known problems found:
-    - Virginia: some rows have `United States Of America` as `DistrictName`.
-    - `Locality` is the county (except for the independent cities), but its code is not the FIPS code. For `ACCOMACK COUNTY`, it is `1`.
+  - Virginia: some rows have `United States Of America` as `DistrictName`. TODO: check which offices these rows belong to (probably races elected statewide or nationwide, which the `US HOUSE` filter removes).
+  - Virginia: the `Locality` code is the county part of the FIPS code with the leading zeros dropped. Evidence: Accomack County = `1` (FIPS 51001), Fairfax County = `59` (FIPS 51059), Alexandria city = `510` (FIPS 51510).
+    - Fix in the prepare step: pad the code to 3 digits and add the state code in front (`51` + `001` = `51001`).
+    - Take the state codes from an official source, not typed by hand: the MEDSL 2024 files have `state_po` and `state_fips`, which give a lookup table from state abbreviation to state FIPS code (VA → `51`).
+    - Keep all FIPS codes as text, not numbers. Stored as a number, Arizona's `04` becomes `4` and breaks the 5-digit code.
+    - Check: every 5-digit code built for 2026 must also appear in the 2024 file and in the TIGER county shapes. A code that doesn't match points to a padding error or a special case.
 
 ## 2024 House results
 
