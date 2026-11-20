@@ -26,13 +26,25 @@ For each source answer:
 
 ## 2024 House results
 
-- What it is:
-- Coverage:
-- Unit and level:
-- How it was collected:
-- Possible biases:
+- What it is: Harvard Dataverse dataset with the 2024 general election results, including House elections.
+- Coverage: results for all states in 2024. Each file has every race (president, Senate, state races).
+- Unit and level: precinct level, but each row also has the FIPS code, county and state.
+- How it was collected: downloaded as one CSV file per state.
+- Possible biases: none so far.
 - Download:
 - Known problems found:
+
+### Comments
+
+- `office`: `US HOUSE` is the US House race.
+- `county_fips`: stored as a string. It's the Census 5-digit code: the first 2 digits are the state code and the last 3 are the county code. For Alaska and Louisiana it identifies boroughs and parishes; for Connecticut it identifies planning regions.
+- `mode`: the voting mode. It is set to `TOTAL` when the results are not broken down by mode.
+  - The Virginia 2024 file doesn't break results down by mode: `mode` is only `TOTAL`.
+- Party fields:
+  - `party_detailed`: the candidate's detailed party. In states with fusion voting, such as New York, a candidate can run on several party lines, and these are reported as such. Blank for ballot measures.
+  - `party_simplified`: standardized party label.
+  - Which field we'll use: `party_simplified`, because it standardizes party names across states. Also, it is our reference for ballot measures.
+- `candidate`: candidate name, standardized within each state. Overvotes and undervotes must be removed, because they are invalid votes and are not part of the final count. Should write-ins be excluded? States seem to have different rules on how they count them.
 
 ## 2020 and 2022 House results (placebo)
 

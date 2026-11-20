@@ -8,7 +8,7 @@ Start with the states likely to have the most data centers, then extend.
 
 | State | Official results link | By county? | Format (CSV / Excel / Clarity / HTML only) | Direct download link | Provisional or certified | Date checked | Notes |
 |-------|-----------------------|------------|--------------------------------------------|----------------------|--------------------------|--------------|-------|
-| Virginia | https://enr.elections.virginia.gov/results/public/virginia/elections/2026-November-General/reports | ✅ | `csv` | | Provisional/Unofficial | 2016-11-20 7:30AM | `csv` contains all results, not only House of Representatives |
+| Virginia | https://enr.elections.virginia.gov/results/public/virginia/elections/2026-November-General | Yes | `csv` | https://enr.elections.virginia.gov/cdn/results/d2c804ee-4ec2-46bb-91d7-5b41526eab03/Election%20Results_ab226c36-0939-4ded-a2a0-84d95c8b7ae3.csv | Provisional/Unofficial | 2026-11-20 7:30AM | The CSV contains all races, not only the House of Representatives. Locality (presumably county), district and precinct each have their own ID. Last updated 2026-11-19. |
 | Texas | | | | | | | |
 | Georgia | | | | | | | |
 | Ohio | | | | | | | |
