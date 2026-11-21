@@ -19,11 +19,13 @@ For each source answer:
 - What it is: official election-night results published by each state's election office. They stay unofficial (provisional) until the state certifies them.
   - Virginia: Virginia Department of Elections results site, one CSV with all races.
   - Texas: Texas Secretary of State election-night results app (2025-current), all races. No download button.
+  - Georgia: Georgia Secretary of State results site (same platform as Virginia), one Excel file with statewide and county sheets.
 - Coverage: statewide results for each state. Check each state's status (official or not).
   - Texas: 254/254 counties reporting; unofficial. Official canvass reports are listed in the API but not yet published.
 - Unit and level: may vary across states.
   - Virginia: precinct level, with locality (county or independent city) and district IDs.
   - Texas: county × district piece (a county split among districts has one piece per district; Harris has 9). Each candidate has a party code (`DEM`/`REP`) and votes (`V`; `EV` is probably early votes).
+  - Georgia: county × contest × candidate (`County Results` sheet), total votes only. Party is `Rep`/`Dem`/`Ind`. Vote modes exist only statewide (`Total Votes by Group` sheet).
 - How it was collected:
   - Virginia: CSV file downloaded manually.
   - Texas: JSON from the app's own API. Found by opening the app's main JS file and searching for `api`. Payload is base64-encoded JSON.
@@ -31,6 +33,7 @@ For each source answer:
 - Download:
   - Virginia: https://enr.elections.virginia.gov/cdn/results/d2c804ee-4ec2-46bb-91d7-5b41526eab03/Election%20Results_ab226c36-0939-4ded-a2a0-84d95c8b7ae3.csv (checked 2026-11-20; the site says last updated 2026-11-19). The file name contains random codes, so the link may change when results are updated.
   - Texas: base `https://goelect.txelections.civixapps.com/api-ivis-system/api/s3/enr/`, endpoints `electionConstants` (list of elections; 2026 General = ID `53815`) and `election/countyInfo/53815` (county results). Checked 2026-11-21; the API says last updated 2026-11-04 22:48:37, data version `enr/53815/117/`.
+  - Georgia: https://results.sos.ga.gov/cdn/results/09378a07-e6cf-4f66-be7c-ca4aa534f99a/Total%20Votes%20Results_b4156d6b-fdd0-46b8-885a-2cb1b8c0349b.xlsx (checked 2026-11-21). Random codes in the link, as in Virginia, so it may change when results are updated.
 - Known problems found:
   - Virginia: some rows have `United States Of America` as `DistrictName`. TODO: check which offices these rows belong to (probably races elected statewide or nationwide, which the `US HOUSE` filter removes).
   - Virginia: the `Locality` code is the county part of the FIPS code with the leading zeros dropped. Evidence: Accomack County = `1` (FIPS 51001), Fairfax County = `59` (FIPS 51059), Alexandria city = `510` (FIPS 51510).
@@ -44,6 +47,9 @@ For each source answer:
   - Texas: the API reports 202 of 200 precincts reporting.
   - Texas: new congressional map in 2026 (2025 redistricting). Confirmed by comparing the SOS 2026 district chart with MEDSL 2024: Anderson 6 → 5, Angelina 17 → split 15/27. Counties' districts differ between years, so build a `districts_changed` flag in the prepare step (see Findings in `data_availability.md`).
   - Texas: unlike Virginia's precinct-level file, results are county × district pieces. No need to add precincts up, but the pieces of a split county must be summed for the county total.
+  - Georgia: each contest has two extra rows with no party, `Total Votes` and `Ballots Cast`. Drop them, or the county total counts votes twice.
+  - Georgia: county names end in " County" (`Appling County`). Remove the suffix and upper-case to match MEDSL (all 159 match).
+  - Georgia: some office names are bilingual (Spanish text added). Filter U.S. House rows on the start of the name, `US House of Representatives`.
 
 ## 2024 House results
 
@@ -57,11 +63,13 @@ For each source answer:
 - Download: https://doi.org/10.7910/DVN/NYTPDU (version 1.0, license CC0 1.0)
   - Virginia: file `2024-va-precinct-general`, downloaded 2026-11-20.
   - Texas: file `2024-tx-precinct-general` (Dataverse file ID 13731167), checked 2026-11-21.
+  - Georgia: file `2024-ga-precinct-general` (Dataverse file ID 13731164), checked 2026-11-21.
 - Known problems found:
   - District codes have 3 digits here, while Virginia's 2026 results store them as a single digit. Standardize before joining.
   - Texas: 960 `US HOUSE` rows have `special = TRUE`, from a special U.S. House election held on the same day. Drop them, or the same voters are counted twice.
   - Texas: a loose "HOUSE" filter also catches `STATE HOUSE` (150 districts). Filter on `office == "US HOUSE"` exactly (38 districts).
   - Texas: `mode` is only `TOTAL`.
+  - Georgia: 2 `US HOUSE` rows belong to the pseudo-county `STATE FLOATING` (no `county_fips`, districts 6 and 11, 0.2% of House votes). They can't be assigned to a county, so they drop out. `mode` is only `TOTAL`, no `special = TRUE` House rows, no `*`.
 
 ### Comments
 
