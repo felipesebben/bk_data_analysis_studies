@@ -54,4 +54,13 @@ Not needed now. Fill in once the 2024–2026 sources are settled.
 - **Precinct count oddity:** the API reports 202 of 200 precincts reporting.
 - **2024 special election:** MEDSL has `special = TRUE` rows for a special U.S. House election held on the same day. Keeping them would count the same voters twice.
 - **Use `office == "US HOUSE"`**, not a loose "HOUSE" match: MEDSL also has `STATE HOUSE` (150 districts).
-- **Redistricting:** Texas redrew its congressional map in 2025. Wikipedia says the 2025 map was the one used in November 2026. TODO: confirm with the SOS district chart (https://www.sos.state.tx.us/elections/forms/2026-district-chart-nov-3-general-election.pdf). Open question for the design: when district lines move, a county's voters may face different candidates in 2024 and 2026, and a piece can be contested in one year and not the other. Is the county two-party swing still comparable?
+- **Redistricting confirmed (2026-11-21):** the 2026 SOS district chart (https://www.sos.state.tx.us/elections/forms/2026-district-chart-nov-3-general-election.pdf) assigns counties to different districts than the MEDSL 2024 file (2021 map). The first three counties in alphabetical order were checked:
+
+  | County | 2024 (MEDSL, 2021 map) | 2026 (SOS chart) | Changed? |
+  |--------|------------------------|------------------|----------|
+  | Anderson | 6 | 5 | Yes |
+  | Andrews | 19 | 19 | No |
+  | Angelina | 17 | 15 and 27 (split) | Yes |
+
+  Angelina is the strongest evidence: it went from one whole district to a split between two, so the lines moved, not just the numbers. 2 of 3 counties changed, and they were picked by alphabetical order, not because a change was expected.
+- **Why it matters for the design:** in a county whose districts changed, voters faced different candidates in 2024 and 2026, so part of the "swing" may come from the new candidates, not from anything about data centers. A piece can also be contested in one year and not the other. Prepare phase: compute a per-county `districts_changed` flag (has the county's set of districts changed between 2024 and 2026?). Possible robustness check: does the result hold in counties whose districts did not change? Decide whether to pre-register it before looking at any results.

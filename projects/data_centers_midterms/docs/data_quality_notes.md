@@ -42,6 +42,7 @@ For each source answer:
     - The formula `48 + (2 × id − 1)` works for 244 counties and fails for 9 (Madison through McMullen, IDs 154–162): Census FIPS sorts "Mc" as "Mac", before Madison; the SOS list does not. Checked against the MEDSL 2024 Texas file.
     - Fix in the prepare step: join to FIPS on county name, not on a formula. One name differs: SOS `LASALLE` vs MEDSL `LA SALLE`. Check that all 254 counties match.
   - Texas: the API reports 202 of 200 precincts reporting.
+  - Texas: new congressional map in 2026 (2025 redistricting). Confirmed by comparing the SOS 2026 district chart with MEDSL 2024: Anderson 6 → 5, Angelina 17 → split 15/27. Counties' districts differ between years, so build a `districts_changed` flag in the prepare step (see Findings in `data_availability.md`).
   - Texas: unlike Virginia's precinct-level file, results are county × district pieces. No need to add precincts up, but the pieces of a split county must be summed for the county total.
 
 ## 2024 House results
