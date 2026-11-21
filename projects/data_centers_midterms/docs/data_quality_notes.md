@@ -18,13 +18,19 @@ For each source answer:
 
 - What it is: official election-night results published by each state's election office. They stay unofficial (provisional) until the state certifies them.
   - Virginia: Virginia Department of Elections results site, one CSV with all races.
+  - Texas: Texas Secretary of State election-night results app (2025-current), all races. No download button.
 - Coverage: statewide results for each state. Check each state's status (official or not).
+  - Texas: 254/254 counties reporting; unofficial. Official canvass reports are listed in the API but not yet published.
 - Unit and level: may vary across states.
   - Virginia: precinct level, with locality (county or independent city) and district IDs.
-- How it was collected: CSV file downloaded manually.
+  - Texas: county × district piece (a county split among districts has one piece per district; Harris has 9). Each candidate has a party code (`DEM`/`REP`) and votes (`V`; `EV` is probably early votes).
+- How it was collected:
+  - Virginia: CSV file downloaded manually.
+  - Texas: JSON from the app's own API. Found by opening the app's main JS file and searching for `api`. Payload is base64-encoded JSON.
 - Possible biases: provisional numbers can change until certification, so the download date matters.
 - Download:
   - Virginia: https://enr.elections.virginia.gov/cdn/results/d2c804ee-4ec2-46bb-91d7-5b41526eab03/Election%20Results_ab226c36-0939-4ded-a2a0-84d95c8b7ae3.csv (checked 2026-11-20; the site says last updated 2026-11-19). The file name contains random codes, so the link may change when results are updated.
+  - Texas: base `https://goelect.txelections.civixapps.com/api-ivis-system/api/s3/enr/`, endpoints `electionConstants` (list of elections; 2026 General = ID `53815`) and `election/countyInfo/53815` (county results). Checked 2026-11-21; the API says last updated 2026-11-04 22:48:37, data version `enr/53815/117/`.
 - Known problems found:
   - Virginia: some rows have `United States Of America` as `DistrictName`. TODO: check which offices these rows belong to (probably races elected statewide or nationwide, which the `US HOUSE` filter removes).
   - Virginia: the `Locality` code is the county part of the FIPS code with the leading zeros dropped. Evidence: Accomack County = `1` (FIPS 51001), Fairfax County = `59` (FIPS 51059), Alexandria city = `510` (FIPS 51510).
@@ -32,6 +38,11 @@ For each source answer:
     - Take the state codes from an official source, not typed by hand: the MEDSL 2024 files have `state_po` and `state_fips`, which give a lookup table from state abbreviation to state FIPS code (VA → `51`).
     - Keep all FIPS codes as text, not numbers. Stored as a number, Arizona's `04` becomes `4` and breaks the 5-digit code.
     - Check: every 5-digit code built for 2026 must also appear in the 2024 file and in the TIGER county shapes. A code that doesn't match points to a padding error or a special case.
+  - Texas: county IDs are 1–254 in the SOS's own alphabetical order, not FIPS.
+    - The formula `48 + (2 × id − 1)` works for 244 counties and fails for 9 (Madison through McMullen, IDs 154–162): Census FIPS sorts "Mc" as "Mac", before Madison; the SOS list does not. Checked against the MEDSL 2024 Texas file.
+    - Fix in the prepare step: join to FIPS on county name, not on a formula. One name differs: SOS `LASALLE` vs MEDSL `LA SALLE`. Check that all 254 counties match.
+  - Texas: the API reports 202 of 200 precincts reporting.
+  - Texas: unlike Virginia's precinct-level file, results are county × district pieces. No need to add precincts up, but the pieces of a split county must be summed for the county total.
 
 ## 2024 House results
 
@@ -41,10 +52,15 @@ For each source answer:
 - How it was collected: MEDSL collected the official results from each state and county, converted them to one format and checked them against official totals (according to the GitHub notes). It is a secondary source: the numbers are a copy of the official numbers. Downloaded as one CSV file per state.
 - Possible biases: `votes` may contain the string `*` where small jurisdictions redact vote counts to prevent identifying voters. This could lead to totals being undercounted for counties, which can bias their share if the redacted votes lean one way. 
   - In pandas, the whole column is read as `text`, so a sum either raises an error or joins the strings together. We'll probably need to use `to_numeric()` to convert strings to numbers and `*` to `NaN`.
-  - Quick check: Virginia sample does not contain any `*` in `US HOUSE` rows.
-- Download: https://doi.org/10.7910/DVN/NYTPDU (version 1.0, file `2024-va-precinct-general`, license CC0 1.0, downloaded 2026-11-20)
+  - Quick check: Virginia sample does not contain any `*` in `US HOUSE` rows. Texas has none either.
+- Download: https://doi.org/10.7910/DVN/NYTPDU (version 1.0, license CC0 1.0)
+  - Virginia: file `2024-va-precinct-general`, downloaded 2026-11-20.
+  - Texas: file `2024-tx-precinct-general` (Dataverse file ID 13731167), checked 2026-11-21.
 - Known problems found:
   - District codes have 3 digits here, while Virginia's 2026 results store them as a single digit. Standardize before joining.
+  - Texas: 960 `US HOUSE` rows have `special = TRUE`, from a special U.S. House election held on the same day. Drop them, or the same voters are counted twice.
+  - Texas: a loose "HOUSE" filter also catches `STATE HOUSE` (150 districts). Filter on `office == "US HOUSE"` exactly (38 districts).
+  - Texas: `mode` is only `TOTAL`.
 
 ### Comments
 
